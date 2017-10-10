@@ -1,6 +1,6 @@
 {
   "name": "node-antminer",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "NodeJS Module for reading out Antminer status via web portal",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/decoscrypto/node-antminer.git"
+    "url": "git+https://github.com/decosblockchain/node-antminer.git"
   },
   "keywords": [
     "Antminer",
@@ -19,9 +19,9 @@
   "author": "Gert-Jaap Glasbergen",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/decoscrypto/node-antminer/issues"
+    "url": "https://github.com/decosblockchain/node-antminer/issues"
   },
-  "homepage": "https://github.com/decoscrypto/node-antminer#readme",
+  "homepage": "https://github.com/decosblockchain/node-antminer#readme",
   "dependencies": {
     "jsdom": "^11.3.0",
     "request": "^2.83.0"
