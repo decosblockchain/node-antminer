@@ -41,6 +41,11 @@ exports.readStats = function(host, port, username, password, callback) {
       'sendImmediately': false
     }
   }, function (error, response, body) {
+    if(error) 
+    {
+      callback(error, null);
+      return;
+    }
     var stats = {};
 
     const frag = JSDOM.fragment(body);
@@ -53,15 +58,15 @@ exports.readStats = function(host, port, username, password, callback) {
 
 
 
-    stats.megaHashRealtime = parseFloat(frag.querySelector("#ant_ghs5s").textContent);
-    stats.megaHashAverage = parseFloat(frag.querySelector("#ant_ghsav").textContent);
+    stats.megaHashRealtime = parseFloat(frag.querySelector("#ant_ghs5s").textContent.replace(',',''));
+    stats.megaHashAverage = parseFloat(frag.querySelector("#ant_ghsav").textContent.replace(',',''));
     stats.blocksFound = parseInt(frag.querySelector("#ant_foundblocks").textContent);
 
     var fanSpeeds = 0;
     var fans = 0;
     var fanCells = frag.querySelectorAll("table#ant_fans tbody tr.cbi-section-table-row td.cbi-value-field");
     for(var i = 0; i < fanCells.length; i++) {
-      if(fanCells[i].textContent != "0") {
+      if(fanCells[i].textContent != "0" && fanCells[i].textContent != "") {
         fans++;
         fanSpeeds += parseFloat(fanCells[i].textContent.replace(',',''));
       }
@@ -96,7 +101,7 @@ exports.readStats = function(host, port, username, password, callback) {
 
 
 
-    callback(stats);
+    callback(null, stats);
   });
 
 }
