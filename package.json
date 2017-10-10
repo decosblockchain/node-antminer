@@ -1,6 +1,6 @@
 {
   "name": "node-antminer",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "NodeJS Module for reading out Antminer status via web portal",
   "main": "index.js",
   "scripts": {
