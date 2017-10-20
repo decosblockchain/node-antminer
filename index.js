@@ -55,11 +55,24 @@ exports.readStats = function(host, port, username, password, callback) {
 
 
     stats.uptime = parseUptime(uptimeText);
-
-
+    var gigaHash = false;
+    var tableTitles = frag.querySelectorAll("table#ant_devs tbody tr.cbi-section-table-titles th.cbi-section-table-cell");
+    tableTitles.forEach((title) => {
+      if(title.textContent) {
+        if(title.textContent.indexOf('GH/S') > -1) { 
+          gigaHash = true;
+        }
+      }
+    })
+    
 
     stats.megaHashRealtime = parseFloat(frag.querySelector("#ant_ghs5s").textContent.replace(',',''));
     stats.megaHashAverage = parseFloat(frag.querySelector("#ant_ghsav").textContent.replace(',',''));
+
+    if(gigaHash) { 
+      stats.megaHashAverage *= 1024;
+      stats.megaHashRealtime *= 1024;
+    }
     stats.blocksFound = parseInt(frag.querySelector("#ant_foundblocks").textContent);
 
     var fanSpeeds = 0;
