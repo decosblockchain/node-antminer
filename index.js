@@ -100,15 +100,17 @@ exports.readStats = function(host, port, username, password, callback) {
 
     var chipTemps = 0;
     var chainRows = frag.querySelectorAll("table#ant_devs tbody tr.cbi-section-table-row");
+    var rows = 0;
     for(var i = 0; i < chainRows.length; i++) {
-      if(chainRows[i].querySelector("#cbi-table-1-chain").textContent == 'Total') continue;
+      if(chainRows[i].querySelector("#cbi-table-1-chain").textContent === 'Total') continue;
+      rows++;
       var chipTemp = chainRows[i].querySelector("#cbi-table-1-temp2").textContent;
       if(chipTemp.indexOf("O:") > -1)
         chipTemp = chipTemp.substring(chipTemp.indexOf('O:')+2);
       chipTemps += parseFloat(chipTemp);
     }
 
-    chipTemps /= chainRows.length;
+    chipTemps /= rows;
 
     stats.averageChipTemperature = chipTemps;
 
